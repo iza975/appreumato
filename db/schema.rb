@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_05_065552) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_05_171330) do
+  create_table "sleep_records", force: :cascade do |t|
+    t.float "sleep_duration"
+    t.string "restful_sleep"
+    t.string "woke_up"
+    t.string "dreams_nightmares"
+    t.text "sleep_description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"

@@ -20,6 +20,12 @@
             flex: 1;
             margin: 10px;
             text-align: center; /* Centralizar o texto dentro dos cards */
+            width: 15rem; /* Largura fixa para os cards */
+            height: 100%; /* Altura fixa para os cards */
+        }
+        .card-img-top {
+            height: 200px; /* Altura fixa para as imagens dentro dos cards */
+            object-fit: cover; /* Manter a proporção da imagem */
         }
     </style>
 </head>
@@ -49,11 +55,11 @@
         </div>
 
         <div class="card" style="width: 18rem;">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW5VImIEez6Zcso7PxXwf7DXBMrK0KQUOOgw&usqp=CAU" class="card-img-top" alt="...">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW5VImIEez6Zcso7PxXwf7DXBMrK0KQUOOgw&usqp=CAU" class="card-img-top" alt="Ícone de Sono">
             <div class="card-body">
-                <h5 class="card-title">Sono</h5>
+                <h5 class="card-title">Registrar Sono</h5>
                 <p class="card-text"></p>
-                <a href="<%= sono_path %>" class="btn btn-primary my-custom-btn">Registrar</a>
+                <a href="<%= sono_path %>" class="btn btn-primary my-custom-btn">Registrar Sono</a>
             </div>
         </div>
 

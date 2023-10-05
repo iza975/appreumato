@@ -16,12 +16,19 @@ class HomeController < ApplicationController
     @medication_frequency = params[:'medication-frequency']
   end
 
-  def sono
-    @sleep_duration = params[:'sleep-duration']
-    @restful_sleep = params[:'restful-sleep']
-    @woke_up = params[:'woke-up']
-    @dreams_nightmares = params[:'dreams-nightmares']
-    @sleep_description = params[:'sleep-description']
+  def create
+    @sleep_record = SleepRecord.new(sleep_record_params)
+    if @sleep_record.save
+      redirect_to root_path, notice: 'Registro de sono criado com sucesso.'
+    else
+      render :sono
+    end
+  end
+
+  private
+
+  def sleep_record_params
+    params.require(:sleep_record).permit(:sleep_duration, :restful_sleep, :woke_up, :dreams_nightmares, :sleep_description)
   end
 
   def exercicio
