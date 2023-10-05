@@ -1,29 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmar Medicação</title>
     <link rel="stylesheet" href="remedio.css"> <!-- Link para o seu arquivo CSS -->
     <script src="remedio.js"></script>
+    <style>
+    .container {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+    
+    .confirmation {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    
+    #voltar-button {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+    
+    /* Estilos adicionais para os botões "Sim" e "Não" */
+    #confirm-button,
+    #not-confirm-button {
+        margin-top: 10px;
+    }
+    </style>
 </head>
-
 <body>
+    <a href="<%= root_path %>" id="voltar-button" class="btn btn-primary back-button">Voltar para a Página Inicial</a>
+
     <div class="container">
         <h1>Confirmar Medicação</h1>
         <div class="medication-info">
-            <p><strong>Medicamento:</strong> <span id="medication-name">Nome do Medicamento</span></p>
-            <p><strong>Dose:</strong> <span id="medication-dose">X mg</span></p>
-            <p><strong>Horários de Toma:</strong> <span id="medication-frequency">08:00, 12:00, 18:00</span></p>
-        </div>
-        <div class="confirmation">
+            <div style="text-align: justify;">
+                <p><strong>Medicamento:</strong> <span id="medication-name">Nome do Medicamento</span></p>
+                <p><strong>Dose:</strong> <span id="medication-dose">X mg</span></p>
+                <p><strong>Horários de Toma:</strong> <span id="medication-frequency">08:00, 12:00, 18:00</span></p>
+            <div style="text-align: justify;">
             <p>Você tomou a medicação?</p>
-            <button id="confirm-button">Sim</button>
-            <button id="not-confirm-button">Não</button>
         </div>
-        <a href="<%= root_path %>" class="btn btn-primary">Voltar para a Página Inicial</a>
+        </div>
+            <button id="confirm-button" class="btn btn-primary">Sim</button>
+            <button id="not-confirm-button" class="btn btn-primary">Não</button>
+        </div>
     </div>
-</body>
 
+
+</body>
 </html>
