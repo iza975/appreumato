@@ -6,9 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Exercícios</title>
     <link rel="stylesheet" href="exercicio.css"> <!-- Link para o seu arquivo CSS -->
+    <style>
+        /* Adicione seus estilos CSS personalizados aqui, se necessário */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .exercise-info {
+            margin: 20px 0;
+        }
+
+        .exercise-confirmation {
+            margin: 20px 0;
+        }
+
+        .back-button {
+            align-self: flex-start;
+            margin-left: 20px;
+        }
+
+        .my-custom-btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .my-custom-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 
 <body>
+    <a href="<%= root_path %>" class="btn btn-primary back-button">Voltar para a Página Inicial</a>
     <div class="container">
         <h1>Registrar alongamentos</h1>
         <div class="exercise-info">
@@ -24,8 +60,7 @@
                 <input type="radio" name="exercise-confirmation" value="nao"> Não
             </label>
         </div>
-        <button type="submit">Registrar</button>
-        <a href="<%= root_path %>" class="btn btn-primary">Voltar para a Página Inicial</a>
+        <button type="submit" class="my-custom-btn">Registrar</button>
     </div>
 </body>
 
