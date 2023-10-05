@@ -1,0 +1,40 @@
+/* Estilos para o body */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(60deg, #1f6764, #ff3366);
+}
+
+/* Estilos para o container dos botões */
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+    grid-gap: 10px; /* Espaço entre os botões */
+    text-align: center;
+}
+
+/* Estilos para os botões e links */
+.button, a.button {
+    display: inline-block;
+    width: 400px; /* Largura personalizada para os botões/links */
+    height: 200px; /* Altura personalizada para os botões/links */
+    background-color: #ffffff; /* Fundo branco para os botões/links */
+    color: #000000; /* Cor do texto personalizada para os botões/links */
+    font-size: 40px; /* Tamanho da fonte para os botões/links */
+    border-radius: 10px; /* Borda arredondada para os botões/links */
+    border: none; /* Remova as bordas dos botões/links */
+    cursor: pointer;
+    text-decoration: none; /* Remova sublinhado padrão dos links */
+    text-align: center; /* Centralize o texto nos links */
+    line-height: 200px; /* Centralize verticalmente o texto nos links */
+    margin: 10px; /* Espaço entre os botões/links */
+}
+
+/* Estilo de hover (ao passar o mouse) para os links */
+a.button:hover {
+    background-color: #eeeeee; /* Altere a cor de fundo ao passar o mouse */
+}
+

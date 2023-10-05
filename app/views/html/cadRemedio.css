@@ -1,0 +1,69 @@
+/* Estilização geral */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(60deg, #1f6764, #ff3366);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+/* Estilização dos campos de entrada */
+.input-container {
+    margin: 10px 0;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Estilização do botão */
+button[type="submit"] {
+    background-color: #1f6764;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #ff3366;
+}
+
+#medication-name {
+    width: 95%; /* Largura desejada para Nome do Medicamento */
+}
+
+#medication-dose {
+    width: 95%; /* Largura desejada para Dose */
+}
+
+
