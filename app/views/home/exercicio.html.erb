@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Exercícios</title>
     <link rel="stylesheet" href="exercicio.css"> <!-- Link para o seu arquivo CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="remedio.js"></script>
     <style>
         /* Adicione seus estilos CSS personalizados aqui, se necessário */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
         .container {
             display: flex;
             flex-direction: column;
@@ -21,11 +27,15 @@
 
         .exercise-confirmation {
             margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .back-button {
-            align-self: flex-start;
-            margin-left: 20px;
+        #voltar-button {
+            position: absolute;
+            top: -5px;
+            left: 10px;
         }
 
         .my-custom-btn {
@@ -35,6 +45,7 @@
             border: none;
             border-radius: 5px;
             text-decoration: none;
+            margin-top: 20px;
         }
 
         .my-custom-btn:hover {
@@ -42,15 +53,15 @@
         }
     </style>
 </head>
-
 <body>
-<a href="<%= root_path %>" id="voltar-button" class="my-custom-btn">Voltar para a Página Inicial</a>
+    <a href="<%= root_path %>" id="voltar-button" class="my-custom-btn">Voltar para a Página Inicial</a>
 
     <div class="container">
         <h1>Registrar alongamentos</h1>
         <div class="exercise-info">
             <p>Faça alongamentos diários para melhorar sua saúde.</p>
-            <img src="https://laboratoriosaogeronimo.com.br/upload/noticias/2021/291b4136a72111ff441eeaa1ba21f0dd.png" alt="Exemplo de Alongamento">
+            <img src="https://laboratoriosaogeronimo.com.br/upload/noticias/2021/291b4136a72111ff441eeaa1ba21f0dd.png"
+                alt="Exemplo de Alongamento">
         </div>
         <div class="exercise-confirmation">
             <p>Você fez seus alongamentos hoje?</p>
@@ -64,5 +75,4 @@
         <button type="submit" class="my-custom-btn">Registrar</button>
     </div>
 </body>
-
 </html>

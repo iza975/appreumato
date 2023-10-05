@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Sono</title>
@@ -16,33 +17,31 @@
             </div>
             <div class="input-container">
                 <label for="restful-sleep">O Sono foi Reparador?</label>
-                <select id="restful-sleep" name="restful-sleep">
+                <select id="restful-sleep" name="restful-sleep" class="custom-select">
                     <option value="sim">Sim</option>
                     <option value="nao">Não</option>
                 </select>
             </div>
             <div class="input-container">
                 <label for="woke-up">Acordou durante o Sono?</label>
-                <select id="woke-up" name="woke-up">
+                <select id="woke-up" name="woke-up" class="custom-select">
                     <option value="sim">Sim</option>
                     <option value="nao">Não</option>
                 </select>
             </div>
             <div class="input-container">
                 <label for="dreams-nightmares">Teve Sonhos ou Pesadelos?</label>
-                <select id="dreams-nightmares" name="dreams-nightmares">
+                <select id="dreams-nightmares" name="dreams-nightmares" class="custom-select">
                     <option value="sim">Sim</option>
                     <option value="nao">Não</option>
                 </select>
             </div>
             <div class="input-container">
                 <label for="sleep-description">Descrição Adicional:</label>
-                <textarea id="sleep-description" name="sleep-description"></textarea>
+                <textarea id="sleep-description" name="sleep-description" class="form-control"></textarea>
             </div>
-            <button type="submit">Registrar</button>
+            <button type="submit" class="btn btn-primary">Registrar</button>
             <a href="<%= root_path %>" class="btn btn-primary">Voltar para a Página Inicial</a>
-
-
         </form>
     </div>
 </body>
