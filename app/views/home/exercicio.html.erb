@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Exercícios</title>
+    <link rel="stylesheet" href="exercicio.css"> <!-- Link para o seu arquivo CSS -->
+</head>
+
+<body>
+    <div class="container">
+        <h1>Registrar alongamentos</h1>
+        <div class="exercise-info">
+            <p>Faça alongamentos diários para melhorar sua saúde.</p>
+            <img src="https://laboratoriosaogeronimo.com.br/upload/noticias/2021/291b4136a72111ff441eeaa1ba21f0dd.png" alt="Exemplo de Alongamento">
+        </div>
+        <div class="exercise-confirmation">
+            <p>Você fez seus alongamentos hoje?</p>
+            <label>
+                <input type="radio" name="exercise-confirmation" value="sim"> Sim
+            </label>
+            <label>
+                <input type="radio" name="exercise-confirmation" value="nao"> Não
+            </label>
+        </div>
+        <button type="submit">Registrar</button>
+        <a href="<%= root_path %>" class="btn btn-primary">Voltar para a Página Inicial</a>
+    </div>
+</body>
+
+</html>

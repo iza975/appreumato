@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
-
   root 'home#index'
+
+  get 'dor', to: 'home#dor', as: :dor
+  post 'dor', to: 'home#process_dor', as: :process_dor # Altere o alias para esta rota
+
+  get 'remedio', to: 'home#remedio', as: :remedio
+  get 'sono', to: 'home#sono', as: :sono
+  get 'exercicio', to: 'home#exercicio', as: :exercicio
 end

@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selecione uma Opção</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link para o seu arquivo CSS -->
-</head>
-
-<body>
-    <div class="button-container">
-        <a href="dor.html" class="button">Dores</a>
-        <a href="remedio.html" class="button">Medicação</a>
-        <a href="sono.html" class="button">Sono</a>
-        <a href="exercicio.html" class="button">Exercício</a>
-    </div>
-</body>
-
-</html>
+<div class="d-flex justify-content-between align-items-center">
+  <h1 class="my-custom-heading">Reumato Home.</h1>
+  <%= link_to "Dor", dor_path, class: "btn btn-primary my-custom-btn" %>
+  <%= link_to "Remédio", remedio_path, class: "btn btn-primary my-custom-btn" %>
+  <%= link_to "Sono", sono_path, class: "btn btn-primary my-custom-btn" %>
+  <%= link_to "Exercício", exercicio_path, class: "btn btn-primary my-custom-btn" %>
+  <!-- O código do ícone vai aqui -->
+</div>

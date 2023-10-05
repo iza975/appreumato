@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Dores</title>
+    <link rel="stylesheet" href="dor.css"> <!-- Link para o seu arquivo CSS -->
+    <script src="dor.js"></script>
+</head>
+<body>
+    <div class="center-content">
+        <div class="container">
+            <h1>Registrar Dores</h1>
+            <form id="pain-form" method="post" action="<%= dor_path %>">
+            <%= csrf_meta_tags %>
+
+                <!-- Campo Local da Dor -->
+                <div class="input-container">
+                    <label for="pain-location">Local da Dor:</label>
+                    <select id="pain-location" name="pain-location">
+                        <option value="cotovelo">Cotovelo</option>
+                        <option value="dedos">Dedos</option>
+                        <option value="joelho">Joelho</option>
+                        <option value="maos">Mãos</option>
+                        <option value="pescoco">Pescoço</option>
+                        <option value="pes">Pés</option>
+                        <option value="pulso">Pulso</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+
+                <!-- Campo Outro Local da Dor (Oculto por padrão) -->
+                <div class="input-container" id="other-location-container" style="display: none;">
+                    <label for="other-location">Qual o local da dor?:</label>
+                    <input type="text" id="other-location" name="other-location">
+                </div>
+
+                <!-- Campo Intensidade da Dor -->
+                <div class="input-container">
+                    <label for="pain-intensity">Intensidade da Dor:</label>
+                    <div class="radio-group" id="pain-intensity">
+                        <input type="radio" id="level1" name="pain-intensity" value="1">
+                        <label for="level1">Leve</label>
+
+                        <input type="radio" id="level2" name="pain-intensity" value="2">
+                        <label for="level2">Moderada</label>
+
+                        <input type="radio" id="level3" name="pain-intensity" value="3">
+                        <label for="level3">Considerável</label>
+
+                        <input type="radio" id="level4" name="pain-intensity" value="4">
+                        <label for="level4">Intensa</label>
+
+                        <input type="radio" id="level5" name="pain-intensity" value="5">
+                        <label for="level5">Muito Intensa</label>
+                    </div>
+                </div>
+
+                <!-- Campo Descrição da Dor -->
+                <div class="input-container">
+                    <label for="pain-description">Descrição da Dor:</label>
+                    <textarea id="pain-description" name="pain-description"></textarea>
+                </div>
+
+                <!-- Botão de Submissão -->
+                <button type="submit">Registrar</button>
+
+                <a href="<%= root_path %>" class="btn btn-primary">Voltar para a Página Inicial</a>
+                
+            </form>
+        </div>
+    </div>
+</body>
+</html>
