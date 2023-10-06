@@ -54,6 +54,10 @@ group :development, :test do
   gem 'bootstrap', '~> 4.5'
 end
 
+group :default do
+  gem 'bcrypt', '~> 3.1.16'
+end
+
 group :assets, :test do
   gem 'bootstrap', '~> 4.5'
 end
