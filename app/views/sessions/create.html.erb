@@ -1,2 +1,58 @@
 <h1>Sessions#create</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="cadastro.css"> <!-- Importe seu arquivo CSS externo aqui -->
+</head>
+
+<body>
+    <div class="registration-container">
+        <h1>Cadastro</h1>
+        <form action="processar-cadastro.php" method="POST">
+            <div class="input-container">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="input-container">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-container">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="input-container">
+                <label for="age">Idade:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="input-container">
+                <label for="gender">Sexo:</label>
+                <select id="gender" name="gender" required>
+                    <option value="male">Masculino</option>
+                    <option value="female">Feminino</option>
+                    <option value="other">Outro</option>
+                </select>
+            </div>
+            <div class="input-container">
+                <label for="disease">Tipo de Doença Reumatológica:</label>
+                <select id="disease" name="disease" required>
+                    <option value="">Selecione uma opção</option>
+                    <option value="artrite-reumatoide">Artrite Reumatoide</option>
+                    <option value="espondilite-ankylosing">Espondilite Anquilosante</option>
+                    <option value="lupus">Lúpus</option>
+                    <option value="gota">Gota</option>
+                    <option value="osteoartrite">Osteoartrite</option>
+                </select>
+            </div>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <p>Já possui uma conta? <a href="login.html">Faça login</a></p>
+    </div>
+</body>
+
+</html>
 <p>Find me in app/views/sessions/create.html.erb</p>
