@@ -1,17 +1,42 @@
-<h1>Cadastro de Usuário</h1>
+<div class="profile-container">
+  <h1>Criar Novo Usuário</h1>
 
-<%= form_for(@user) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= form_for(@user, url: users_path, method: :post) do |f| %>
+    <div class="form-group">
+      <%= f.label :name, "Nome:" %>
+      <%= f.text_field :name, class: 'form-control', required: true %>
+    </div>
 
-  <%= f.label :email %>
-  <%= f.email_field :email %>
+    <div class="form-group">
+      <%= f.label :email, "Email:" %>
+      <%= f.email_field :email, class: 'form-control', required: true %>
+    </div>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+    <div class="form-group">
+      <%= f.label :password, "Senha:" %>
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
 
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
+    <div class="form-group">
+      <%= f.label :password_confirmation, "Confirme a Senha:" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </div>
 
-  <%= f.submit 'Cadastrar' %>
-<% end %>
+    <div class="form-group">
+      <%= f.label :age, "Idade:" %>
+      <%= f.number_field :age, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :gender, "Sexo:" %>
+      <%= f.select :gender, ['Masculino', 'Feminino', 'Outro'], { prompt: 'Selecione' }, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :disease, "Tipo de Doença Reumatológica:" %>
+      <%= f.select :disease, ['Artrite Reumatoide', 'Espondilite Anquilosante', 'Lúpus', 'Gota', 'Osteoartrite'], { prompt: 'Selecione' }, class: 'form-control', required: true %>
+    </div>
+
+    <%= f.submit 'Criar Usuário', class: 'btn btn-primary' %>
+  <% end %>
+</div>

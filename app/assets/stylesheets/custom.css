@@ -1,0 +1,6 @@
+.registration-container {
+    max-width: 400px; /* Define a largura máxima do container do formulário */
+    margin: 0 auto; /* Centraliza o formulário na tela */
+    padding: 20px; /* Adiciona margens internas ao formulário */
+  }
+  

@@ -15,10 +15,10 @@
     <%= yield %>
 
     <% if logged_in? %>
-      <%= link_to 'Sair', logout_path, method: :delete %>
-    <% else %>
-      <%= link_to 'Logar', login_path %>
-    <% end %>
+    <%= link_to 'Sair', logout_path, method: :delete %>
+  <% else %>
+    <%= link_to 'Logar', login_path %>
+  <% end %>
 
   </body>
 </html>

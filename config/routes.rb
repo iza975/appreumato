@@ -4,15 +4,19 @@ Rails.application.routes.draw do
 
   delete '/logout', to: 'sessions#destroy', as: 'logout'
   get '/logout', to: 'sessions#destroy'
-  
-  get 'signup', to: 'users#new'
-  post 'signup', to: 'users#create'
 
+  resources :users, only: [:new, :create] do
+    get 'success', on: :member
+  end
+  
+
+  get 'user_list', to: 'users#index' # Renomeei a rota para listar usuários
 
   root 'home#index'
+  
 
   get 'dor', to: 'home#dor', as: :dor
-  post 'dor', to: 'home#process_dor', as: :process_dor # Altere o alias para esta rota
+  post 'dor', to: 'home#process_dor', as: :process_dor
 
   get 'remedio', to: 'home#remedio', as: :remedio
   get 'sono', to: 'home#sono', as: :sono

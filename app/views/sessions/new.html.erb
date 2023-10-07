@@ -1,14 +1,18 @@
 <h1>Login</h1>
-<%= form_for :session, url: login_path do |f| %>
+
+<%= form_with(model: User.new, url: login_path) do |form| %>
   <div class="form-group">
-    <%= f.label :email %>
-    <%= f.email_field :email, class: 'form-control', id: 'exampleInputEmail1', placeholder: 'Entre com seu e-mail' %>
+    <%= form.label :email, "Email address" %>
+    <%= form.email_field :email, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :password %>
-    <%= f.password_field :password, class: 'form-control', id: 'exampleInputPassword1', placeholder: 'Senha' %>
+    <%= form.label :password, "Password" %>
+    <%= form.password_field :password, class: 'form-control' %>
   </div>
+  <div class="form-group">
+    <%= form.submit 'Logar', class: 'btn btn-primary' %>
   </div>
-  <%= f.submit 'Entrar', class: 'btn btn-primary' %>
 <% end %>
 
+<%= link_to 'Cadastrar Novo Usuário', new_user_path, class: 'btn btn-secondary' %>
+<%= link_to 'Logout', logout_path, method: :delete, class: 'btn btn-danger', style: 'margin-top: 10px;' %>
