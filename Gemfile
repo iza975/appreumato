@@ -60,6 +60,7 @@ end
 
 group :assets, :test do
   gem 'bootstrap', '~> 4.5'
+  gem 'bootstrap', '~> 4.5'
 end
 
 group :development do

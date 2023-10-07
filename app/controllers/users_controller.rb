@@ -15,12 +15,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:user][:email].downcase)
-    if user && user.authenticate(params[:user][:password])
-      log_in(user)
+    @user = User.new(user_params)
+    if @user.save
+      log_in(@user)
       redirect_to root_path
     else
-      flash.now[:danger] = 'Email ou senha inválidos'
+      flash.now[:danger] = 'Erro ao criar o usuário.'
       render 'new'
     end
   end
