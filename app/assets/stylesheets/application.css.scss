@@ -8,3 +8,66 @@
     /* Estilos personalizados para os botões */
   }
   
+  /* Adicione este CSS ao seu arquivo de estilo (app/assets/stylesheets/application.css) */
+
+.login-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.login-form h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.btn-login {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+.btn-login:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+}
+
+.custom-btn {
+  font-size: 18px; /* Define o tamanho da fonte */
+  margin-top: 10px; /* Define a margem superior para espaçamento */
+  /* Adicione mais estilos responsivos conforme necessário */
+}
+
+h1 {
+  text-align: center; /* Centraliza o texto horizontalmente */
+  font-size: 24px; /* Define o tamanho da fonte */
+  margin-bottom: 20px; /* Define a margem inferior para um espaçamento adequado */
+}
+
+.forgot-password-link {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #007bff;
+}

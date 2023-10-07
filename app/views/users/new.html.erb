@@ -1,42 +1,73 @@
-<div class="profile-container">
-  <h1>Criar Novo Usuário</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ReumatoApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-  <%= form_for(@user, url: users_path, method: :post) do |f| %>
-    <div class="form-group">
-      <%= f.label :name, "Nome:" %>
-      <%= f.text_field :name, class: 'form-control', required: true %>
-    </div>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    
+  </head>
 
-    <div class="form-group">
-      <%= f.label :email, "Email:" %>
-      <%= f.email_field :email, class: 'form-control', required: true %>
-    </div>
+  <body>
+    <%= yield %>
 
-    <div class="form-group">
-      <%= f.label :password, "Senha:" %>
-      <%= f.password_field :password, class: 'form-control' %>
-    </div>
+    <% if logged_in? %>
+      <%= link_to 'Sair', logout_path, method: :delete %>
+    <% else %>
+      <div class="container my-5">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="profile-container">
+              <h1>Criar Novo Usuário</h1>
 
-    <div class="form-group">
-      <%= f.label :password_confirmation, "Confirme a Senha:" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-    </div>
+              <%= form_for(@user, url: users_path, method: :post) do |f| %>
+                <div class="form-group">
+                  <%= f.label :name, "Nome:" %>
+                  <%= f.text_field :name, class: 'form-control', required: true %>
+                </div>
 
-    <div class="form-group">
-      <%= f.label :age, "Idade:" %>
-      <%= f.number_field :age, class: 'form-control', required: true %>
-    </div>
+                <div class="form-group">
+                  <%= f.label :email, "Email:" %>
+                  <%= f.email_field :email, class: 'form-control', required: true %>
+                </div>
 
-    <div class="form-group">
-      <%= f.label :gender, "Sexo:" %>
-      <%= f.select :gender, ['Masculino', 'Feminino', 'Outro'], { prompt: 'Selecione' }, class: 'form-control', required: true %>
-    </div>
+                <div class="form-group">
+                  <%= f.label :password, "Senha:" %>
+                  <%= f.password_field :password, class: 'form-control' %>
+                </div>
 
-    <div class="form-group">
-      <%= f.label :disease, "Tipo de Doença Reumatológica:" %>
-      <%= f.select :disease, ['Artrite Reumatoide', 'Espondilite Anquilosante', 'Lúpus', 'Gota', 'Osteoartrite'], { prompt: 'Selecione' }, class: 'form-control', required: true %>
-    </div>
+                <div class="form-group">
+                  <%= f.label :password_confirmation, "Confirme a Senha:" %>
+                  <%= f.password_field :password_confirmation, class: 'form-control' %>
+                </div>
 
-    <%= f.submit 'Criar Usuário', class: 'btn btn-primary' %>
-  <% end %>
-</div>
+                <div class="form-group">
+                  <%= f.label :age, "Idade:" %>
+                  <%= f.number_field :age, class: 'form-control', required: true %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :gender, "Sexo:" %>
+                  <%= f.select :gender, ['Masculino', 'Feminino', 'Outro'], { prompt: 'Selecione' }, class: 'form-control', required: true %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :disease, "Tipo de Doença Reumatológica:" %>
+                  <%= f.select :disease, ['Artrite Reumatoide', 'Espondilite Anquilosante', 'Lúpus', 'Gota', 'Osteoartrite'], { prompt: 'Selecione' }, class: 'form-control', required: true %>
+                </div>
+
+                <div class="form-group text-center">
+                  <%= f.submit 'Criar Usuário', class: 'btn btn-secondary' %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+  </body>
+</html>
