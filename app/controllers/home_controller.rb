@@ -1,3 +1,4 @@
+
 class HomeController < ApplicationController
   before_action :require_login
 
@@ -10,12 +11,14 @@ class HomeController < ApplicationController
   end
 
   def dor
+    puts params
     @pain_location = params[:'pain-location']
     @pain_intensity = params[:'pain-intensity']
     @pain_description = params[:'pain-description']
     render 'dor'
+    
   end
-
+  
   def remedio
     @medication_name = params[:'medication-name']
     @medication_dose = params[:'medication-dose']
@@ -28,6 +31,41 @@ class HomeController < ApplicationController
       redirect_to root_path, notice: 'Registro de sono criado com sucesso.'
     else
       render :sono
+    end
+  end
+
+  def historico
+    # Recupere os registros de medicação (ou dor) para o usuário atual
+    @historico_remedios = MedicationRecord.where(user_id: current_user.id)
+    # Recupere também os registros de dor, se necessário
+    @historico_dores = PainRecord.where(user_id: current_user.id)
+
+    # Receba os parâmetros do formulário
+    @pain_location = params[:'pain-location']
+    @pain_intensity = params[:'pain-intensity']
+    @pain_description = params[:'pain-description']
+      
+    # Crie e salve um novo PainRecord com os dados recebidos
+    @pain_record = PainRecord.new(
+      user_id: current_user.id,
+      pain_location: @pain_location,
+      pain_intensity: @pain_intensity,
+      pain_description: @pain_description
+    )
+  
+    render 'historico'
+  end
+
+  def registrar_dor
+    pain_record = PainRecord.new(
+      user_id: current_user.id,
+      pain_location: params[:'pain-location'],
+      pain_intensity: params[:'pain-intensity'],
+      pain_description: params[:'pain-description']
+    )
+puts params
+    if pain_record.save
+      redirect_to root_path, notice: 'Registro de dor criado com sucesso.'
     end
   end
 

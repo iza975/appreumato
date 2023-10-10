@@ -48,7 +48,7 @@
     <div class="center-content">
         <div class="container">
             <h1>Registrar Dores</h1>
-            <form id="pain-form" method="post" action="<%= dor_path %>">
+<form id="pain-form" method="post" action="<%= registrar_dor_path %>">
                 <%= csrf_meta_tags %>
                 <!-- Campo Local da Dor -->
                 <div class="input-container">
@@ -77,33 +77,32 @@
                     <label for="pain-intensity">Intensidade da Dor:</label>
                     <div class="radio-group" id="pain-intensity">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="level1" name="pain-intensity" value="1">
+                            <input class="form-check-input" type="radio" id="level1" name="pain-intensity" value="Leve">
                             <label class="form-check-label" for="level1">Leve</label>
                         </div>
                 
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="level2" name="pain-intensity" value="2">
+                            <input class="form-check-input" type="radio" id="level2" name="pain-intensity" value="Moderada">
                             <label class="form-check-label" for="level2">Moderada</label>
                         </div>
                 
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="level3" name="pain-intensity" value="3">
+                            <input class="form-check-input" type="radio" id="level3" name="pain-intensity" value="Considerável">
                             <label class="form-check-label" for="level3">Considerável</label>
                         </div>
                 
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="level4" name="pain-intensity" value="4">
+                            <input class="form-check-input" type="radio" id="level4" name="pain-intensity" value="Intensa">
                             <label class="form-check-label" for="level4">Intensa</label>
                         </div>
                 
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="level5" name="pain-intensity" value="5">
+                            <input class="form-check-input" type="radio" id="level5" name="pain-intensity" value="Muito Intensa">
                             <label class="form-check-label" for="level5">Muito Intensa</label>
                         </div>
                     </div>
                 </div>
-                
-                
+                                
                 <!-- Campo Descrição da Dor -->
                 <div class="input-container" style="margin-top: 20px;">
                     <label for="pain-description">Descrição da Dor:</label>

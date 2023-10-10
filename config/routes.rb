@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   get 'password_resets/edit', to: 'password_resets#edit', as: 'edit_password_reset'
   patch 'password_resets/update', to: 'password_resets#update'
   
-
   delete '/logout', to: 'sessions#destroy', as: 'logout'
   get '/logout', to: 'sessions#destroy'
 
@@ -22,13 +21,14 @@ Rails.application.routes.draw do
     get 'success', on: :member
   end
   
-
   get 'user_list', to: 'users#index' # Renomeei a rota para listar usuários
 
   root 'home#index'
+  post 'registrar_dor', to: 'home#registrar_dor', as: :registrar_dor
   
+  get 'historico', to: 'home#historico', as: :historico
 
-  get 'dor', to: 'home#dor', as: :dor
+  get '/dor', to: 'home#dor', as: :dor
   post 'dor', to: 'home#process_dor', as: :process_dor
 
   get 'remedio', to: 'home#remedio', as: :remedio

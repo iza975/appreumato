@@ -1,0 +1,15 @@
+<% if @historico_dores.any? %>
+  <h2>Dores Registradas</h2>
+  <ul>
+    <% @historico_dores.each do |dor| %>
+      <li>
+        Local da Dor: <%= dor.pain_location %><br>
+        Intensidade da Dor: <%= dor.pain_intensity %><br>
+        Descrição da Dor: <%= dor.pain_description %><br>
+        Data e Hora do Registro: <%= dor.created_at %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Nenhum registro de dor encontrado.</p>
+<% end %>
