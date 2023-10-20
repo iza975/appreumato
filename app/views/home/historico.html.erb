@@ -1,15 +1,61 @@
-<% if @historico_dores.any? %>
-  <h2>Dores Registradas</h2>
-  <ul>
-    <% @historico_dores.each do |dor| %>
-      <li>
-        Local da Dor: <%= dor.pain_location %><br>
-        Intensidade da Dor: <%= dor.pain_intensity %><br>
-        Descrição da Dor: <%= dor.pain_description %><br>
-        Data e Hora do Registro: <%= dor.created_at %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>Nenhum registro de dor encontrado.</p>
-<% end %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico de Dores</title>
+    <link rel="stylesheet" href="seu-estilo.css"> <!-- Substitua "seu-estilo.css" pelo caminho do seu arquivo CSS -->
+    <script src="seu-script.js"></script> <!-- Substitua "seu-script.js" pelo caminho do seu arquivo JavaScript -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .my-table {
+            margin-top: 20px; /* Adiciona espaço acima da tabela */
+        }
+
+        .btn-back-container {
+            margin: 20px 20px 0 20px; /* Adiciona espaço entre o botão e a tabela */
+        }
+    </style>
+</head>
+<body>
+    <div class="btn-back-container">
+        <a href="<%= root_path %>" class="btn btn-primary btn-back">Voltar para a Página Inicial</a>
+    </div>
+    <div class="center-content">
+        <table class="table table-bordered my-table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Local da Dor</th>
+                    <th scope="col">Intensidade da Dor</th>
+                    <th scope="col">Descrição da Dor</th>
+                    <th scope="col">Data e Hora do Registro</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @historico_dores.each_with_index do |dor, index| %>
+                    <tr>
+                        <th scope="row"><%= index + 1 %></th>
+                        <td><%= dor.pain_location %></td>
+                        <td><%= dor.pain_intensity %></td>
+                        <td><%= dor.pain_description %></td>
+                        <td><%= dor.created_at.strftime("%Y-%m-%d %H:%M:%S %Z") %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

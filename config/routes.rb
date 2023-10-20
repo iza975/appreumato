@@ -28,6 +28,10 @@ Rails.application.routes.draw do
   
   get 'historico', to: 'home#historico', as: :historico
 
+  get '/consultas', to: 'consultas#index'
+  get 'eventos', to: 'consultas#eventos'
+
+
   get '/dor', to: 'home#dor', as: :dor
   post 'dor', to: 'home#process_dor', as: :process_dor
 

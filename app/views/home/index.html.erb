@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Adicione o link para o arquivo CSS do FullCalendar -->
+    <%= stylesheet_link_tag 'fullcalendar/main.min' %>
     <title>Bem Vindo ao Portal</title>
     <style>
         /* Adicione estilos personalizados aqui, se necessário */
@@ -31,7 +33,7 @@
 </head>
 <body>
     <!-- Navbar Bootstrap para posicionar o botão "Sair" -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="#">Bem vindo ao portal</a>
             <div class="collapse navbar-collapse justify-content-end">
@@ -56,6 +58,7 @@
         <% else %>
             <p>Por favor, faça login para acessar conteúdo exclusivo.</p>
         <% end %>
+
 
     <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; padding: 20px;">
 
@@ -99,8 +102,22 @@
     </div>
 
         <!-- Adicione os scripts JavaScript do Bootstrap e jQuery abaixo se necessário -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    </body>
-    </html>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Inclua o script do FullCalendar -->
+    <%= javascript_include_tag 'fullcalendar' %>
+
+    <!-- Inclua o código JavaScript para inicializar o FullCalendar -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          events: '<%= eventos_path %>',  // Use uma rota definida em routes.rb
+          // Outras configurações do calendário
+        });
+        calendar.render();
+      });
+    </script>
+</body>
+</html>

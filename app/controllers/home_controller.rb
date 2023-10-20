@@ -8,6 +8,18 @@ class HomeController < ApplicationController
     else
       # Trate o caso em que o usuário não está logado
     end
+
+    # Lógica do FullCalendar
+    @events = [
+      { title: 'Evento 1', start: '2023-10-10' },
+      { title: 'Evento 2', start: '2023-10-15' }
+    ]
+
+    # Configuração do FullCalendar
+    @calendar_options = {
+      header: { left: 'prev,next today', center: 'title', right: 'dayGridMonth,timeGridWeek,timeGridDay' },
+      events: @events
+    }
   end
 
   def dor
