@@ -4,15 +4,47 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .medication-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .medication-card {
+            width: calc(16.66% - 10px); /* Para 6 cartões por linha */
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+
+        /* Estilo para tornar o título da pergunta "Dose" e "Horário" em negrito */
+        .bold-text {
+            font-weight: bold;
+        }
+
+        /* Estilo para ajustar o título "Medicação" mais para baixo na página */
+        h1.page-title {
+            margin-top: 20px;
+        }
+    </style>
     <title>Medicação</title>
 </head>
 <body>
     <div class="container">
         <a href="<%= root_path %>" class="btn btn-primary back-button" style="position: absolute; top: 10px; left: 10px;">Voltar para a Página Inicial</a>
-        <h1>Medicação</h1>
+
+        <!-- Título "Medicação" com margem superior ajustada -->
+        <h1 class="page-title">Medicação</h1>
+
         <button id="open-popup-button" class="btn btn-primary" data-toggle="modal" data-target="#medication-popup" style="position: absolute; top: 10px; right: 10px;">Adicionar Novo Medicamento</button>
         <ul id="medications-list" class="list-group">
             <!-- Lista de medicamentos em cartões será adicionada aqui -->
+            <div class="medication-cards">
+                <!-- Cartões de medicamento serão inseridos aqui -->
+            </div>
         </ul>
     </div>
 
@@ -21,7 +53,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cadastro de Medicamento</h5>
+                    <h5 class="modal-title">Cadastro de Medicamento</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -33,11 +65,11 @@
                             <input type="text" class="form-control" id="medication-name" name="medication-name">
                         </div>
                         <div class="form-group">
-                            <label for="medication-dose">Dose:</label>
+                            <label for="medication-dose" class="bold-text">Dose:</label>
                             <input type="text" class="form-control" id="medication-dose" name="medication-dose">
                         </div>
                         <div class="form-group">
-                            <label for="medication-frequency">Horário de Toma (HH:MM):</label>
+                            <label for="medication-frequency" class="bold-text">Horário de Toma (HH:MM):</label>
                             <input type="time" class="form-control" id="medication-frequency" name="medication-frequency">
                         </div>
                     </form>
@@ -50,64 +82,60 @@
         </div>
     </div>
 
+    <!-- ... Seu código JavaScript ... -->
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Inclua o Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        // Função para adicionar medicamento à lista após o envio do formulário
+        // Variável para manter os medicamentos
+        let medications = [];
+
+        // Função para salvar medicamento
         document.getElementById("submit-medication-button").addEventListener("click", function() {
             const medicationName = document.getElementById("medication-name").value;
             const medicationDose = document.getElementById("medication-dose").value;
             const medicationFrequency = document.getElementById("medication-frequency").value;
             
             if (medicationName && medicationDose && medicationFrequency) {
-                const medications = loadMedications();
                 medications.push({
                     name: medicationName,
                     dose: medicationDose,
                     frequency: medicationFrequency,
-                    taken: false // Inicialmente não tomado
+                    taken: false
                 });
+
                 saveMedications(medications);
-                updateMedicationsList();
+                updatePagination();
                 $('#medication-popup').modal('hide');
-                document.getElementById("medication-form").reset(); // Limpar o formulário
+                document.getElementById("medication-form").reset();
             }
         });
 
-        // Função para atualizar a lista de medicamentos
-        function updateMedicationsList() {
-            const medications = loadMedications();
-            const medicationsList = document.getElementById("medications-list");
+        // Função para abrir a popup
+        function openMedicationPopup() {
+            $('#medication-popup').modal('show');
+        }
+
+        // Função para ocultar cartões marcados como tomados
+        function hideTakenCards() {
+            const medicationsList = document.querySelector(".medication-cards");
             medicationsList.innerHTML = "";
-            medications.forEach(function(medication, index) {
+
+            const currentMedications = medications.filter(medication => !medication.taken);
+
+            currentMedications.forEach(function(medication, index) {
                 const medicationCard = `
-                    <li class="list-group-item">
-                        <h5>${medication.name}</h5>
-                        <p>Dose: ${medication.dose}</p>
-                        <p>Horário: ${medication.frequency}</p>
+                    <div class="medication-card">
+                        <h5 class="bold-text">${medication.name}</h5>
+                        <p><span class="bold-text">Dose:</span> ${medication.dose}</p>
+                        <p><span class="bold-text">Horário:</span> ${medication.frequency}</p>
                         <button class="btn btn-primary" onclick="markAsTaken(${index})">Marcar como Tomado</button>
-                    </li>
+                    </div>
                 `;
-                if (!medication.taken) {
-                    medicationsList.insertAdjacentHTML("beforeend", medicationCard);
-                }
+                medicationsList.insertAdjacentHTML("beforeend", medicationCard);
             });
         }
-
-        // Função para marcar um medicamento como tomado
-        function markAsTaken(index) {
-            const medications = loadMedications();
-            medications[index].taken = true;
-            saveMedications(medications);
-            updateMedicationsList();
-        }
-
-        // Carregar medicamentos quando a página é carregada
-        window.addEventListener("load", function() {
-            updateMedicationsList();
-        });
 
         // Função para salvar medicamentos no armazenamento local
         function saveMedications(medications) {
@@ -116,9 +144,46 @@
 
         // Função para carregar medicamentos do armazenamento local
         function loadMedications() {
-            const medications = JSON.parse(localStorage.getItem("medications")) || [];
+            const savedMedications = localStorage.getItem("medications");
+            medications = savedMedications ? JSON.parse(savedMedications) : [];
             return medications;
+        }
+
+        // Carregar medicamentos quando a página é carregada
+        window.addEventListener("load", function() {
+            medications = loadMedications();
+            updatePagination();
+        });
+
+        // Função para marcar um medicamento como tomado
+        function markAsTaken(index) {
+            if (medications[index]) {
+                medications[index].taken = true;
+                saveMedications(medications);
+                hideTakenCards();
+            }
+        }
+
+        // Função para atualizar a exibição dos cartões com base na página atual
+        function updatePagination() {
+            const medicationsList = document.querySelector(".medication-cards");
+            medicationsList.innerHTML = "";
+
+            const currentMedications = medications.filter(medication => !medication.taken);
+
+            currentMedications.forEach(function(medication, index) {
+                const medicationCard = `
+                    <div class="medication-card">
+                        <h5 class="bold-text">${medication.name}</h5>
+                        <p><span class="bold-text">Dose:</span> ${medication.dose}</p>
+                        <p><span class="bold-text">Horário:</span> ${medication.frequency}</p>
+                        <button class="btn btn-primary" onclick="markAsTaken(${index})">Marcar como Tomado</button>
+                    </div>
+                `;
+                medicationsList.insertAdjacentHTML("beforeend", medicationCard);
+            });
         }
     </script>
 </body>
 </html>
+        
