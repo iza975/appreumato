@@ -10,10 +10,16 @@ class HomeController < ApplicationController
     end
 
     # Lógica do FullCalendar
-    @events = [
-      { title: 'Evento 1', start: '2023-10-10' },
-      { title: 'Evento 2', start: '2023-10-15' }
-    ]
+    @events = [] # Inicialize um array vazio para os eventos
+
+    # Supondo que você tenha um modelo chamado Event que contém os eventos do calendário
+    @events = Event.all.map do |event|
+      {
+        title: event.title,
+        start: event.start_date,
+        end: event.end_date
+      }
+    end
 
     # Configuração do FullCalendar
     @calendar_options = {

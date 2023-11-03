@@ -20,7 +20,11 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create] do
     get 'success', on: :member
   end
+
+  get 'eventos', to: 'consultas#eventos'
   
+  resources :medications
+
   get 'user_list', to: 'users#index' # Renomeei a rota para listar usuários
 
   root 'home#index'

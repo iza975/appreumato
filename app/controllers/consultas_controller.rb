@@ -1,35 +1,30 @@
 # app/controllers/consultas_controller.rb
+
 class ConsultasController < ApplicationController
-    def index
-      # Lógica para recuperar as consultas e passá-las para a view
-    end
-  end
+  before_action :require_login
 
   def index
-    @consultas = Consulta.all  # Consulta todos os registros de consultas no banco de dados
+      # Outra lógica do método index se necessário
   end
-  
-  class ConsultasController < ApplicationController
-    def eventos
-      # Coloque aqui a lógica para buscar as consultas/eventos do calendário
-      # Essas consultas/eventos devem ser retornados no formato JSON
-  
-      # Exemplo de eventos em formato JSON:
-      eventos = [
-        {
-          title: 'Consulta 1',
-          start: '2023-11-01T10:00:00',
-          end: '2023-11-01T11:00:00'
-        },
-        {
-          title: 'Consulta 2',
-          start: '2023-11-03T14:00:00',
-          end: '2023-11-03T15:00:00'
-        }
-        # Adicione mais eventos conforme necessário
-      ]
-  
-      render json: eventos
-    end
+
+  def eventos
+      if logged_in?
+          # Recupere os medicamentos registrados
+          medications = current_user.medications  # Supondo que você tenha uma relação entre usuários e medicamentos
+
+          # Converta os medicamentos em eventos para o calendário
+          events = medications.map do |medication|
+              {
+                  title: "Medicação: #{medication.name}",
+                  start: medication.start_time.strftime("%Y-%m-%d %H:%M:%S"),
+                  end: medication.end_time.strftime("%Y-%m-%d %H:%M:%S"),
+                  color: 'blue'  # Cor do evento no calendário (opcional)
+              }
+          end
+      else
+          events = []
+      end
+
+      render json: events
   end
-  
+end

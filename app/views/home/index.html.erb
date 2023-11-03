@@ -22,18 +22,21 @@
             flex: 1;
             margin: 10px;
             text-align: center; /* Centralizar o texto dentro dos cards */
-            width: 15rem; /* Largura fixa para os cards */
+            width: 18rem; /* Largura fixa para os cards */
             height: 100%; /* Altura fixa para os cards */
         }
         .card-img-top {
             height: 200px; /* Altura fixa para as imagens dentro dos cards */
             object-fit: cover; /* Manter a proporção da imagem */
         }
+        #calendar {
+            margin-top: 20px; /* Espaçamento acima do calendário */
+        }
     </style>
 </head>
 <body>
     <!-- Navbar Bootstrap para posicionar o botão "Sair" -->
- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="#">Bem vindo ao portal</a>
             <div class="collapse navbar-collapse justify-content-end">
@@ -52,7 +55,9 @@
     </nav>
 
     <div class="container">
-        <h1 class="my-custom-heading"></h1>
+        <h1 class="my-custom-heading">Calendário</h1>
+        <div id="calendar"></div>
+        
         <% if logged_in? %>
             <p>Olá, <%= @user.name %>! Você está logado.</p>
         <% else %>
@@ -98,21 +103,21 @@
         </div>
     </div>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Inclua o script do FullCalendar -->
     <%= javascript_include_tag 'fullcalendar' %>
 
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          events: '<%= eventos_path %>',  // Use uma rota definida em routes.rb
-          // Outras configurações do calendário
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                events: '<%= eventos_path %>',  // Use a rota definida em routes.rb
+                // Outras configurações do calendário
+            });
+            calendar.render();
         });
-        calendar.render();
-      });
     </script>
 </body>
 </html>

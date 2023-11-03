@@ -1,0 +1,7 @@
+<!-- app/views/medications/index.html.erb -->
+<h1>Lista de Medicamentos</h1>
+<ul>
+  <% @medications.each do |medication| %>
+    <li><%= medication.name %>, Dose: <%= medication.dose %>, Horário: <%= medication.frequency %></li>
+  <% end %>
+</ul>

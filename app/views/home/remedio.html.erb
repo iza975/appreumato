@@ -18,7 +18,15 @@
             padding: 10px;
             border: 1px solid #ccc;
             background-color: #f9f9f9;
+            position: relative;
         }
+
+        .medication-card .text-right {
+            position: absolute;
+            top: 10px; /* Ajuste conforme necessário para a posição desejada */
+            right: 10px; 
+        }
+
 
         /* Estilo para tornar o título da pergunta "Dose" e "Horário" em negrito */
         .bold-text {
@@ -82,21 +90,28 @@
         </div>
     </div>
 
-    <!-- ... Seu código JavaScript ... -->
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+    
     <script>
         // Variável para manter os medicamentos
         let medications = [];
+
+        // Função para remover um medicamento
+        function removeMedication(index) {
+            if (medications[index]) {
+                medications.splice(index, 1);
+                saveMedications(medications);
+                hideTakenCards();
+            }
+        }
 
         // Função para salvar medicamento
         document.getElementById("submit-medication-button").addEventListener("click", function() {
             const medicationName = document.getElementById("medication-name").value;
             const medicationDose = document.getElementById("medication-dose").value;
             const medicationFrequency = document.getElementById("medication-frequency").value;
-            
+    
             if (medicationName && medicationDose && medicationFrequency) {
                 medications.push({
                     name: medicationName,
@@ -104,9 +119,9 @@
                     frequency: medicationFrequency,
                     taken: false
                 });
-
+    
                 saveMedications(medications);
-                updatePagination();
+                hideTakenCards();
                 $('#medication-popup').modal('hide');
                 document.getElementById("medication-form").reset();
             }
@@ -126,12 +141,17 @@
 
             currentMedications.forEach(function(medication, index) {
                 const medicationCard = `
-                    <div class="medication-card">
-                        <h5 class="bold-text">${medication.name}</h5>
-                        <p><span class="bold-text">Dose:</span> ${medication.dose}</p>
-                        <p><span class="bold-text">Horário:</span> ${medication.frequency}</p>
-                        <button class="btn btn-primary" onclick="markAsTaken(${index})">Marcar como Tomado</button>
-                    </div>
+                <div class="medication-card">
+                <div class="text-right"> <!-- Esta div alinhará o botão "X" à direita -->
+                    <button class="btn btn-danger" onclick="removeMedication(${index})">X</button>
+                </div>
+                <h5 class="bold-text">${medication.name}</h5>
+                <p><span class="bold-text">Dose:</span> ${medication.dose}</p>
+                <p><span class="bold-text">Horário:</span> ${medication.frequency}</p>
+                <button class="btn btn-primary" onclick="markAsTaken(${index})">Marcar como Tomado</button>
+            </div>
+            
+            
                 `;
                 medicationsList.insertAdjacentHTML("beforeend", medicationCard);
             });
@@ -152,7 +172,7 @@
         // Carregar medicamentos quando a página é carregada
         window.addEventListener("load", function() {
             medications = loadMedications();
-            updatePagination();
+            hideTakenCards();
         });
 
         // Função para marcar um medicamento como tomado
@@ -163,27 +183,6 @@
                 hideTakenCards();
             }
         }
-
-        // Função para atualizar a exibição dos cartões com base na página atual
-        function updatePagination() {
-            const medicationsList = document.querySelector(".medication-cards");
-            medicationsList.innerHTML = "";
-
-            const currentMedications = medications.filter(medication => !medication.taken);
-
-            currentMedications.forEach(function(medication, index) {
-                const medicationCard = `
-                    <div class="medication-card">
-                        <h5 class="bold-text">${medication.name}</h5>
-                        <p><span class="bold-text">Dose:</span> ${medication.dose}</p>
-                        <p><span class="bold-text">Horário:</span> ${medication.frequency}</p>
-                        <button class="btn btn-primary" onclick="markAsTaken(${index})">Marcar como Tomado</button>
-                    </div>
-                `;
-                medicationsList.insertAdjacentHTML("beforeend", medicationCard);
-            });
-        }
     </script>
 </body>
 </html>
-        
