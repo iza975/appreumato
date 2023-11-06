@@ -49,8 +49,7 @@
         <div class="container">
             <h1>Registrar Dores</h1>
 <form id="pain-form" method="post" action="<%= registrar_dor_path %>">
-                <%= csrf_meta_tags %>
-                <!-- Campo Local da Dor -->
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
                 <div class="input-container">
                     <label for="pain-location">Local da Dor:</label>
                     <select id="pain-location" name="pain-location" class="custom-select">

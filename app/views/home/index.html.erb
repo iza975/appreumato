@@ -1,40 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Adicione o link para o arquivo CSS do FullCalendar -->
-    <%= stylesheet_link_tag 'fullcalendar/main.min' %>
-    <title>Bem Vindo ao Portal</title>
-    <style>
-        /* Adicione estilos personalizados aqui, se necessário */
-        .my-custom-heading {
-            color: #333;
-            text-align: center; /* Centralizar o título */
-            margin-top: 20px; /* Espaçamento acima do título */
-        }
-        .my-custom-btn {
-            background-color: #007bff;
-            color: #fff;
-        }
-        .card {
-            flex: 1;
-            margin: 10px;
-            text-align: center; /* Centralizar o texto dentro dos cards */
-            width: 18rem; /* Largura fixa para os cards */
-            height: 100%; /* Altura fixa para os cards */
-        }
-        .card-img-top {
-            height: 200px; /* Altura fixa para as imagens dentro dos cards */
-            object-fit: cover; /* Manter a proporção da imagem */
-        }
-        #calendar {
-            margin-top: 20px; /* Espaçamento acima do calendário */
-        }
-    </style>
-</head>
-<body>
+
     <!-- Navbar Bootstrap para posicionar o botão "Sair" -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
@@ -55,69 +19,117 @@
     </nav>
 
     <div class="container">
-        <h1 class="my-custom-heading">Calendário</h1>
-        <div id="calendar"></div>
-        
-        <% if logged_in? %>
-            <p>Olá, <%= @user.name %>! Você está logado.</p>
-        <% else %>
-            <p>Por favor, faça login para acessar conteúdo exclusivo.</p>
-        <% end %>
-
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; padding: 20px;">
-
-        <div class="card" style="width: 18rem;">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROHW82s9trd1SU97fdUm5xa-BDpDLo8z95pKPz66BSfdJ3giqEq1roMpyLIujlvDZQkvw&usqp=CAU" class="card-img-top" alt="...">
-          <div class="card-body">
-                <h5 class="card-title">Dor</h5>
-                <p class="card-text"></p>
-                <a href="<%= dor_path %>" class="btn btn-primary my-custom-btn">Registrar</a>
-            </div>
+        <div class="title-container">
+            <h2>Agendar consultas</h2>
+            <button id="openPopupButton" class="btn btn-primary">Agendar Consulta</button>
         </div>
 
-        <div class="card" style="width: 18rem;">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOnpkXo_zH7nkyMmhDSUr-MR0dKtun-jZibQ&usqp=CAU" class="card-img-top" alt="...">
-          <div class="card-body">
-                <h5 class="card-title">Medicação</h5>
-                <p class="card-text"></p>
-                <a href="<%= remedio_path %>" class="btn btn-primary my-custom-btn">Confirmar Medicação</a>
+        <div id="popup" style="display: none;">
+        <!-- Popup para cadastro de agendamentos -->
+        <h3>Cadastro de Agendamentos</h3>
+        <form id="consulta-form">
+            <div class="form-group">
+                <label for="dia">Dia:</label>
+                <input type="text" class="form-control" id="dia">
             </div>
-        </div>
-
-        <div class="card" style="width: 18rem;">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW5VImIEez6Zcso7PxXwf7DXBMrK0KQUOOgw&usqp=CAU" class="card-img-top" alt="Ícone de Sono">
-            <div class="card-body">
-                <h5 class="card-title">Registrar Sono</h5>
-                <p class="card-text"></p>
-                <a href="<%= sono_path %>" class="btn btn-primary my-custom-btn">Registrar Sono</a>
+            <div class="form-group">
+                <label for="hora">Hora:</label>
+                <input type="text" class="form-control" id="hora">
             </div>
-        </div>
-
-        <div class="card" style="width: 18rem;">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6xSdr5AHVwaI9I3b8N2qcTr0XBzONzRFdPRQfECksQfdopju7-Y8G03YpVHAq1-zw-1c&usqp=CAU" class="card-img-top">
-            <div class="card-body">
-                <h5 class="card-title">Exercício</h5>
-                <p class="card-text"></p>
-                <a href="<%= exercicio_path %>" class="btn btn-primary my-custom-btn">Registrar</a>
+            <div class="form-group">
+                <label for="local">Local:</label>
+                <input type="text" class="form-control" id="local">
             </div>
-        </div>
+            <div class="form-group">
+                <label for="especialidade">Especialidade:</label>
+                <input type="text" class="form-control" id="especialidade">
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Inclua o script do FullCalendar -->
-    <%= javascript_include_tag 'fullcalendar' %>
+        <table id="consultas-table" class="table">
+            <thead>
+                <tr>
+                    <th>Dia</th>
+                    <th>Hora</th>
+                    <th>Local</th>
+                    <th>Especialidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Consultas agendadas aparecerão aqui -->
+                
+            </tbody>
+        </table>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                events: '<%= eventos_path %>',  // Use a rota definida em routes.rb
-                // Outras configurações do calendário
-            });
-            calendar.render();
-        });
-    </script>
-</body>
-</html>
+        <%= stylesheet_link_tag 'style' %>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; padding: 20px;">
+
+                            <div class="card" style="width: 15rem;">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROHW82s9trd1SU97fdUm5xa-BDpDLo8z95pKPz66BSfdJ3giqEq1roMpyLIujlvDZQkvw&usqp=CAU" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Dor</h5>
+                                    <p class="card-text"></p>
+                                    <a href="<%= dor_path %>" class="btn btn-primary my-custom-btn">Registrar</a>
+                                </div>
+                            </div>
+
+                            <div class="card" style="width: 15rem;">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOnpkXo_zH7nkyMmhDSUr-MR0dKtun-jZibQ&usqp=CAU" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Medicação</h5>
+                                    <p class="card-text"></p>
+                                    <a href="<%= remedio_path %>" class="btn btn-primary my-custom-btn">Confirmar Medicação</a>
+                                </div>
+                            </div>
+
+                            <div class="card" style="width: 15rem;">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW5VImIEez6Zcso7PxXwf7DXBMrK0KQUOOgw&usqp=CAU" class="card-img-top" alt="Ícone de Sono">
+                                <div class="card-body">
+                                    <h5 class="card-title">Registrar Sono</h5>
+                                    <p class="card-text"></p>
+                                    <a href="<%= sono_path %>" class="btn btn-primary my-custom-btn">Registrar Sono</a>
+                                </div>
+                            </div>
+
+                            <div class="card" style="width: 15rem;">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6xSdr5AHVwaI9I3b8N2qcTr0XBzONzRFdPRQfECksQfdopju7-Y8G03YpVHAq1-zw-1c&usqp=CAU" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Exercício</h5>
+                                    <p class="card-text"></p>
+                                    <a href="<%= exercicio_path %>" class="btn btn-primary my-custom-btn">Registrar</a>
+                                </div>
+                            </div>
+
+        </div>
+
+        <div class="medication-history">
+        <h2>Histórico de Medicamentos</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Remédio</th>
+                    <th>Dose</th>
+                    <th>Horário</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if @medications.present? %>
+                    <% @medications.each do |medication| %>
+                        <tr>
+                            <td><%= medication.name %></td>
+                            <td><%= medication.dose %></td>
+                            <td><%= medication.frequency %></td>
+                        </tr>
+                    <% end %>
+                <% else %>
+                    <tr>
+                        <td colspan="3">Nenhum medicamento no histórico.</td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    </div>

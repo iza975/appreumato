@@ -1,0 +1,96 @@
+/* Estilo para o Navbar */
+.navbar {
+    background-color: #f8f9fa;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .my-custom-btn {
+    margin-right: 10px;
+  }
+  
+  /* Estilo para o título e botão "Agendar Consulta" */
+  .title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  #openPopupButton {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Estilo para o popup de cadastro de agendamentos */
+  #popup {
+    display: none;
+    margin: 20px 0;
+  }
+  
+  #popup h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  #consulta-form {
+    margin-top: 10px;
+  }
+  
+  #consulta-form .form-group {
+    margin-bottom: 10px;
+  }
+  
+  /* Estilo para a tabela de consultas agendadas */
+  #consultas-table {
+    margin-top: 20px;
+  }
+  
+  #consultas-table th {
+    font-weight: bold;
+    background-color: #f8f9fa;
+  }
+  
+  /* Estilo para os cards */
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .card {
+    width: 18rem;
+    margin: 10px;
+  }
+  
+  .card-img-top {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Estilo para o histórico de medicamentos */
+  .medication-history {
+    margin-top: 20px;
+  }
+  
+  .medication-history h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Estilo para a tabela de histórico de medicamentos */
+  .medication-history table {
+    margin-top: 10px;
+  }
+  
+  .medication-history table th {
+    font-weight: bold;
+    background-color: #f8f9fa;
+  }
+
+  

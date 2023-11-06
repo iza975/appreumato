@@ -10,11 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_03_162528) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_06_122437) do
+  create_table "dors", force: :cascade do |t|
+    t.string "location"
+    t.string "other_location"
+    t.string "intensity"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "title"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "medicamentos", force: :cascade do |t|
+    t.string "name"
+    t.string "dose"
+    t.string "frequency"
+    t.boolean "taken"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -35,15 +53,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_03_162528) do
     t.time "frequency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_medications_on_user_id"
   end
 
   create_table "pain_records", force: :cascade do |t|
-    t.string "pain_location"
-    t.string "pain_intensity"
-    t.text "pain_description"
+    t.string "location"
+    t.text "description"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.string "pain_intensity"
     t.index ["user_id"], name: "index_pain_records_on_user_id"
   end
 
@@ -61,13 +81,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_03_162528) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "age"
+    t.string "age"
     t.string "gender"
     t.string "disease"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "medication_records", "users"
+  add_foreign_key "medications", "users"
   add_foreign_key "pain_records", "users"
 end

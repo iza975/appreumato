@@ -1,31 +1,15 @@
-
 class HomeController < ApplicationController
   before_action :require_login
 
   def index
+
     if logged_in?
       @user = current_user
+      @medications = Medication.all
     else
       # Trate o caso em que o usuário não está logado
     end
 
-    # Lógica do FullCalendar
-    @events = [] # Inicialize um array vazio para os eventos
-
-    # Supondo que você tenha um modelo chamado Event que contém os eventos do calendário
-    @events = Event.all.map do |event|
-      {
-        title: event.title,
-        start: event.start_date,
-        end: event.end_date
-      }
-    end
-
-    # Configuração do FullCalendar
-    @calendar_options = {
-      header: { left: 'prev,next today', center: 'title', right: 'dayGridMonth,timeGridWeek,timeGridDay' },
-      events: @events
-    }
   end
 
   def dor
@@ -34,13 +18,21 @@ class HomeController < ApplicationController
     @pain_intensity = params[:'pain-intensity']
     @pain_description = params[:'pain-description']
     render 'dor'
-    
   end
   
   def remedio
-    @medication_name = params[:'medication-name']
-    @medication_dose = params[:'medication-dose']
-    @medication_frequency = params[:'medication-frequency']
+     # Carregar o histórico de medicamentos
+    @medications = Medication.where(user_id: current_user.id)
+ 
+  end
+
+  def cria_remedio
+    @medication = Medication.create(medication_params)
+if @medication.save
+      redirect_to root_path, notice: 'Medicamento cadastrado com sucesso!'
+    else
+      flash[:error] = "Erro ao salvar a medicação. Certifique-se de preencher todos os campos."
+    end
   end
 
   def create
@@ -53,9 +45,6 @@ class HomeController < ApplicationController
   end
 
   def historico
-    # Recupere os registros de medicação (ou dor) para o usuário atual
-    @historico_remedios = MedicationRecord.where(user_id: current_user.id)
-    # Recupere também os registros de dor, se necessário
     @historico_dores = PainRecord.where(user_id: current_user.id)
 
     # Receba os parâmetros do formulário
@@ -63,14 +52,13 @@ class HomeController < ApplicationController
     @pain_intensity = params[:'pain-intensity']
     @pain_description = params[:'pain-description']
       
-    # Crie e salve um novo PainRecord com os dados recebidos
-    @pain_record = PainRecord.new(
-      user_id: current_user.id,
-      pain_location: @pain_location,
-      pain_intensity: @pain_intensity,
-      pain_description: @pain_description
-    )
-  
+       # Verifique se há medicamentos no histórico e defina a mensagem apropriada
+    if @historico_remedios.present?
+      @historico_medicamentos_message = "Pendente remedio"
+    else
+      @historico_medicamentos_message = "Nenhum histórico de medicamentos disponível."
+    end
+
     render 'historico'
   end
 
@@ -81,7 +69,7 @@ class HomeController < ApplicationController
       pain_intensity: params[:'pain-intensity'],
       pain_description: params[:'pain-description']
     )
-puts params
+    puts params
     if pain_record.save
       redirect_to root_path, notice: 'Registro de dor criado com sucesso.'
     end
@@ -103,4 +91,17 @@ puts params
   def exercicio
     @exercise_confirmation = params[:'exercise-confirmation']
   end
+
+  def medication_params
+    params.require(:medication).permit(:name, :dose, :frequency).merge(user_id:current_user.id)
+  end
+
+  def pain_record_params
+    params.require(:pain_record).permit(:pain_location, :pain_intensity)
+  end
+
+    def pain_record_params
+  params.require(:pain_record).permit(:pain_location, :pain_intensity)
+end
+
 end
