@@ -26,6 +26,35 @@ class HomeController < ApplicationController
  
   end
 
+  def agendar_consulta
+    # Se o formulário de agendamento for enviado (quando o usuário clica em "Salvar")
+    if request.post?
+      # Lógica para salvar a consulta
+  
+      if consulta.save
+        flash[:notice] = "Consulta agendada com sucesso!"
+        redirect_to root_path
+      else
+        flash.now[:alert] = "Erro ao agendar a consulta. Verifique os dados do formulário."
+        render :agendar_consulta
+      end
+    else
+      # Se não for um pedido POST, renderize a página de agendamento
+      render :agendar_consulta
+    end
+  end
+
+  def save_agendamento
+    # Lógica para salvar a consulta
+
+    if consulta.save
+      redirect_to root_path, notice: "Consulta agendada com sucesso!"
+    else
+      flash.now[:alert] = "Erro ao agendar a consulta. Verifique os dados do formulário."
+      render :agendar_consulta
+    end
+  end
+
   def cria_remedio
     @medication = Medication.create(medication_params)
 if @medication.save

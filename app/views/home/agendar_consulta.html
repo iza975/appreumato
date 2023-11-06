@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Medicação</title>
+    <link rel="stylesheet" href="remedio.css"> <!-- Link para o seu arquivo CSS -->
+    <script src="remedio.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 400px; /* Define a largura máxima para manter o conteúdo legível */
+        }
+
+        .input-container {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        #consulta-form button[type="submit"] {
+            width: 100%; /* Faz o botão ocupar a largura total do seu contêiner */
+        }
+
+        .btn-back {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Formulário de agendamento de consulta -->
+    <div class="center-content">
+        <div class="container">
+            <h3>Cadastro de Agendamentos</h3>
+            <form id="consulta-form">
+                <div class="form-group input-container">
+                    <label for="dia">Dia:</label>
+                    <input type="text" class="form-control" id="dia">
+                </div>
+                <div class="form-group input-container">
+                    <label for="hora">Hora:</label>
+                    <input type="text" class="form-control" id="hora">
+                </div>
+                <div class="form-group input-container">
+                    <label for="local">Local:</label>
+                    <input type="text" class="form-control" id="local">
+                </div>
+                <div class="form-group input-container">
+                    <label for="especialidade">Especialidade:</label>
+                    <input type="text" class="form-control" id="especialidade">
+                </div>
+                <!-- Botão de Submissão -->
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get 'user_list', to: 'users#index'
 
   root 'home#index'
+  
   post 'registrar_dor', to: 'home#registrar_dor', as: :registrar_dor
 
   get 'historico', to: 'home#historico', as: :historico
@@ -42,6 +43,10 @@ Rails.application.routes.draw do
   get 'remedio', to: 'home#remedio', as: :remedio
   post 'remedio', to: 'home#cria_remedio'
 
+  get 'agendar_consulta', to: 'home#agendar_consulta', as: :agendar_consulta
+  post 'agendar_consulta', to: 'home#save_agendamento'
+
   get 'sono', to: 'home#sono', as: :sono
   get 'exercicio', to: 'home#exercicio', as: :exercicio
+
 end
